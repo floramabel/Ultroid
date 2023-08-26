@@ -1,14 +1,36 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- main
+- master
+
+pr:
+- '*'
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'ubuntu-latest'
 
-steps:
-- script:wget -O locals.py https://git.io/JY9UM && python3 locals.py
-  displayName: 'Run a one-line script'
+jobs:
+- job: BuildAndDeploy
+  steps:
+  - checkout: self
+
+  - task: UsePythonVersion@0
+    inputs:
+      versionSpec: '3.x'
+      addToPath: true
+
+  - script: |
+      # Install required packages
+      pip install tgcalls==3.0.0.dev6
+      pip install emoji
+    displayName: 'Install Dependencies'
+
+  - script: |
+      # Download Ultroid installer and run it
+      wget https://raw.githubusercontent.com/TeamUltroid/Ultroid/dev/installer.sh
+      chmod +x installer.sh
+      sudo bash installer.sh --dir="/root/TeamUltroid" --branch=dev --env-file="ultroid/.env"
+    displayName: 'Install Ultroid'
+
+  - script: |
+      # Run Ultroid bot
+      sudo bash action.sh
+    displayName: 'Run Ultroid'

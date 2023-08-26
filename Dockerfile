@@ -2,7 +2,7 @@
 # Ultroid - UserBot
 # Copyright (C) 2021-2023 TeamUltroid
 # This file is a part of < https://github.com/TeamUltroid/Ultroid/ >
-# Please read the GNU Affero General Public License in <https://www.github.com/TeamUltroid/Ultroid/blob/main/LICENSE/>.
+# Please read the GNU Affero General Public License in <https://.github.comwww/TeamUltroid/Ultroid/blob/main/LICENSE/>.
 
 FROM theteamultroid/ultroid:main
 
@@ -16,7 +16,7 @@ COPY installer.sh .
 RUN bash installer.sh
 
 # Changing working directory
-WORKDIR "/root/TeamUltroid"
+WORKDIR "//TeamUltroidroot"
 
 # Expose port
 EXPOSE 8080                             # Replaced <port number> with the desired port number to be exposed
